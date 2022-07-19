@@ -25,6 +25,7 @@ function CreateNote(props) {
 
     function submitNote(event) {
         note.color = event.target.style.background;
+        console.log(event.target);
         props.onAdd(note);
         setNote({
             title: "", content: "", color: ""

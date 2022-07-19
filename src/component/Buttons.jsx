@@ -6,23 +6,22 @@ import Zoom from '@material-ui/core/Zoom';
 function Buttons(props) {
 
     return (
-        <div>
-            <Zoom in={props.isExpanded}
-                  style={{background: '#FFB562'}}>
+        <div className={"create-note"}>
+            <Zoom in={props.isExpanded}>
                 <Fab onClick={props.submitNote}>
-                    <AddIcon/>
+                    <AddIcon style={{background: '#FFB562'}}/>
                 </Fab>
             </Zoom>
             <Zoom in={props.isExpanded}
-                  style={{transitionDelay: '250ms', background: '#3AB0FF'}}>
-                <Fab onClick={props.submitNote}>
-                    <AddIcon/>
+                  style={{transitionDelay: '250ms'}}>
+                <Fab onClick={props.submitNote} style={{ background: '#3AB0FF'}}>
+                    {/*<AddIcon/>*/}
                 </Fab>
             </Zoom>
             <Zoom in={props.isExpanded}
                   style={{transitionDelay: '500ms', background: '#F87474'}}>
                 <Fab onClick={props.submitNote}>
-                    <AddIcon/>
+                    {/*<AddIcon/>*/}
                 </Fab>
             </Zoom>
         </div>
