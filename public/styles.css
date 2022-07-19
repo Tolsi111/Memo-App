@@ -9,7 +9,6 @@ html {
 body {
     background-color: #f9f2ed;
     background-image: url("https://www.transparenttextures.com/patterns/cardboard-flat.png");
-    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
     padding: 0 16px;
 }
 
