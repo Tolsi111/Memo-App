@@ -1,1 +1,1 @@
-# My encounter with React
+# My first encounter with React
