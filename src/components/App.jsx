@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
+import './styles.css'
 // import memos from "../memos";
 // local file
 import CreateNote from "./CreateNote";

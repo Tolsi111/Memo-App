@@ -1,9 +1,13 @@
 import React, {useState} from "react";
 import Buttons from "./Buttons";
+import ErrorModal from "./ErrorModal";
 
 function CreateNote(props) {
 
     const [isExpanded, setExpanded] = useState(false);
+    const [error, setError] = useState({
+        isError: false, title: "", message: ""
+    });
 
     const [note, setNote] = useState({
         title: "", content: "", color: ""
@@ -23,9 +27,26 @@ function CreateNote(props) {
         })
     }
 
+    function closeError() {
+        setError({
+            isError: false, title: "", message: ""
+        });
+    }
+
     function submitNote(event) {
+        if (note.title.trim().length === 0) {
+            setError({
+                isError: true, title: "Need a title!", message: "Please add a title to the note."
+            });
+            return
+        }
+        if (note.content.trim().length === 0) {
+            setError({
+                isError: true, title: "Missing content!", message: "Please do not leave an empty note."
+            });
+            return
+        }
         note.color = event.target.style.background;
-        console.log(event.target);
         props.onAdd(note);
         setNote({
             title: "", content: "", color: ""
@@ -34,6 +55,7 @@ function CreateNote(props) {
     }
 
     return (<div>
+        {error.isError && <ErrorModal title={error.title} message={error.message} closeError={closeError}/>}
         <form className={"create-note"}>
             {isExpanded ? <input name={"title"}
                                  onChange={handleChange}
