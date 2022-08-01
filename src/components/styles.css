@@ -13,9 +13,11 @@ body {
 }
 
 header {
+    box-sizing: unset;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    width: 100%;
     background-color: #ffb562 ;
     margin: auto -16px;
     padding: 16px 32px;
