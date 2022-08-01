@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import StartFirebase from "../config/firebase-config";
-import { ref, remove } from "firebase/database";
-// import StartFirebase from "../config/firebase-config";
-// import {ref} from "firebase/database";
+import {ref, remove} from "firebase/database";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
@@ -10,6 +8,7 @@ import './styles.css'
 // import memos from "../memos";
 // local file
 import CreateNote from "./CreateNote";
+import {Navigate, Route, Routes} from "react-router-dom";
 
 function App() {
 
@@ -41,7 +40,7 @@ function App() {
 
             const loadedNotes = [];
 
-            for(const key in responseData) {
+            for (const key in responseData) {
                 loadedNotes.push({
                     id: key,
                     title: responseData[key].title,
@@ -55,13 +54,15 @@ function App() {
         getNotes().catch((err) => {
             console.log(err);
         })
-    },[])
+    }, [])
 
     function deleteNote(id) {
         console.log("id of the entity to be deleted: " + id);
-        const noteRef = ref(db,'/notes/' + id);
+        const noteRef = ref(db, '/notes/' + id);
         console.log("ref: " + noteRef);
-        remove(noteRef).catch((err) => {console.log(err)});
+        remove(noteRef).catch((err) => {
+            console.log(err)
+        });
         setNotes(prevState => {
             return prevState.filter((noteItem) => {
                 return noteItem.id !== id;
@@ -69,19 +70,24 @@ function App() {
         })
     }
 
+    const noteList = notes.map((noteItem) => {
+        return <Note
+            key={noteItem.id}
+            id={noteItem.id}
+            title={noteItem.title}
+            content={noteItem.content}
+            onDelete={deleteNote}
+            color={noteItem.color}/>
+    })
+
     return (
         <div>
             <Header/>
-            <CreateNote onAdd={addNote}/>
-            {notes.map((noteItem) => {
-                return <Note
-                    key={noteItem.id}
-                    id={noteItem.id}
-                    title={noteItem.title}
-                    content={noteItem.content}
-                    onDelete={deleteNote}
-                    color={noteItem.color}/>
-            })}
+            <Routes>
+                <Route path={'/notes'} element={noteList}/>
+                <Route path={'/new-note'} element={<CreateNote onAdd={addNote}/>}/>
+                <Route path={'/*'} element={<Navigate to={'/notes'}/>}/>
+            </Routes>
             <Footer/>
         </div>
     );

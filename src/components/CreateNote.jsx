@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import Buttons from "./Buttons";
 import ErrorModal from "./ErrorModal";
+import {useNavigate} from 'react-router-dom';
 
 function CreateNote(props) {
 
+    const navigate = useNavigate();
     const [isExpanded, setExpanded] = useState(false);
     const [error, setError] = useState({
         isError: false, title: "", message: ""
@@ -51,6 +53,7 @@ function CreateNote(props) {
         setNote({
             title: "", content: "", color: ""
         })
+        navigate('/notes');
         event.preventDefault();
     }
 

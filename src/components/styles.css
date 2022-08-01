@@ -13,6 +13,9 @@ body {
 }
 
 header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     background-color: #ffb562 ;
     margin: auto -16px;
     padding: 16px 32px;
@@ -23,6 +26,22 @@ header h1 {
     color: #fff;
     font-family: "McLaren", cursive;
     font-weight: 200;
+}
+header a:hover,
+header a:active,
+header a.active {
+    color: #fff;
+    padding-bottom: 0.25rem;
+    text-decoration: underline;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header ul {
+    color: #fff;
 }
 
 footer {
