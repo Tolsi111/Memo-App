@@ -6,8 +6,6 @@ function Note(props) {
 
     function handleClick() {
         props.onDelete(props.id);
-        console.log("color: ");
-        console.log(props.color);
     }
 
     return (
