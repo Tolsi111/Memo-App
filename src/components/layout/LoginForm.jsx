@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useRef, useState, useEffect} from "react";
 import classes from './Forms.module.css'
-import {Link} from "react-router-dom";
+import AuthContext from "../../store/auth-context";
 
 function LoginForm() {
     const userRef = useRef();
     const errRef = useRef();
+
+    const authCtx = useContext(AuthContext);
+
+    const [isLoading,setIsLoading] = useState(false);
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
@@ -21,8 +25,34 @@ function LoginForm() {
     }, [user, pwd])
 
     function handleSubmit(event) {
+        //https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDNdPXneiScTdz5FGRt0PhxSzaLXuGqlPA
         event.preventDefault();
-        console.log("Submit Login")
+        console.log("Start Sign Up!")
+        setIsLoading(true);
+        fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDNdPXneiScTdz5FGRt0PhxSzaLXuGqlPA', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: user,
+                password: pwd,
+                returnSecureToken: true
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            setIsLoading(false);
+            if (res.ok) {
+                setSuccess(true);
+                return res.json();
+            } else {
+                return res.json().then(data => {
+                    setErrMsg(data.error.message)
+                });
+            }
+        }).then(data => {
+            console.log(data);
+            authCtx.login(data.idToken,data.email);
+        });
     }
 
     return (
@@ -30,17 +60,13 @@ function LoginForm() {
             {success ? (
                 <section>
                     <h1>You are logged in!</h1>
-                    <br/>
-                    <p>
-                        <Link to={'/notes'}>Go to notes</Link>
-                    </p>
                 </section>
             ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? classes.errmsg : classes.offscreen}>{errMsg}</p>
                     <h1>Sign In</h1>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">Username:</label>
+                        <label htmlFor="username">Email:</label>
                         <input
                             type="text"
                             id="username"
@@ -59,14 +85,9 @@ function LoginForm() {
                             value={pwd}
                             required
                         />
-                        <button>Sign In</button>
+                        {!isLoading && <button>Sign In</button>}
+                        {isLoading && <p>Loading...</p>}
                     </form>
-                    <p>
-                        Need an Account?<br/>
-                        <span className="line">
-                            <Link to={'/register'}>Sign Up</Link>
-                        </span>
-                    </p>
                 </section>
             )}
         </>

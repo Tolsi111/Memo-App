@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from "react";
-import StartFirebase from "../../config/firebase-config";
+import StartFirebase from "../config/firebase-config";
 import {ref, remove} from "firebase/database";
-import Header from "./Header";
-import Footer from "./Footer";
-import Note from "../notes/Note";
-import '../styles.css'
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
+import Note from "./notes/Note";
+import './styles.css'
 // import memos from "../memos";
 // local file
-import CreateNote from "../notes/CreateNote";
+import CreateNote from "./notes/CreateNote";
 import {Navigate, Route, Routes} from "react-router-dom";
-import LoginForm from "./LoginForm";
-import RegistrationForm from "./RegistrationForm";
+import LoginForm from "./layout/LoginForm";
+import RegistrationForm from "./layout/RegistrationForm";
+import LogoutForm from "./layout/LogoutForm";
 
 function App() {
 
@@ -89,6 +90,7 @@ function App() {
                 <Route path={'/notes'} element={noteList}/>
                 <Route path={'/login'} element={<LoginForm/>}/>
                 <Route path={'/register'} element={<RegistrationForm/>}/>
+                <Route path={'/logout'} element={<LogoutForm/>}/>
                 <Route path={'/new-note'} element={<CreateNote onAdd={addNote}/>}/>
                 <Route path={'/*'} element={<Navigate to={'/notes'}/>}/>
             </Routes>
