@@ -1,6 +1,6 @@
 import Fab from '@material-ui/core/Fab';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import "./ErrorModal.css"
+import "./Modal.css"
 
 function ErrorModal(props) {
     return (

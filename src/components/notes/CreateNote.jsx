@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Buttons from "./Buttons";
-import ErrorModal from "./ErrorModal";
+import ErrorModal from "../layout/ErrorModal";
 import {useNavigate} from 'react-router-dom';
 
 function CreateNote(props) {
