@@ -54,7 +54,7 @@ function CreateNote(props) {
         note.ownerEmail = authCtx.email;
         props.onAdd(note);
         setNote({
-            title: "", content: "", color: ""
+            title: "", content: "", color: "", ownerEmail: ""
         })
         navigate('/notes');
         event.preventDefault();
