@@ -1,11 +1,14 @@
 section {
-    width: 100%;
+    position: relative;
+    width: 480px;
+    margin: 30px auto 20px auto;
+    padding: 15px;
+    border-radius: 7px;
     max-width: 420px;
     min-height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 1rem;
     background-color: rgba(0,0,0,0.4);
 }
 
