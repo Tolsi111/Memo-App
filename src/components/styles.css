@@ -15,7 +15,7 @@ body {
 header {
     box-sizing: unset;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
     background-color: #ffb562 ;

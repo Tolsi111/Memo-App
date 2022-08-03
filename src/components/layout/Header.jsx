@@ -31,7 +31,7 @@ function Header() {
             </ul>}
             {authCtx.isLoggedIn && <ul>
                 <li>
-                    <h1><NavLink to={'/logout'} activeClassName={"active"}>Logout</NavLink></h1>
+                    <h1><NavLink to={'/profile'} activeClassName={"active"}>Profile</NavLink></h1>
                 </li>
             </ul>}
         </nav>

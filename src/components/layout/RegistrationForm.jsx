@@ -45,7 +45,6 @@ function RegistrationForm() {
     }, [user, pwd, matchPwd])
 
     function handleSubmit(event) {
-        //https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDNdPXneiScTdz5FGRt0PhxSzaLXuGqlPA
         event.preventDefault();
         console.log("Start Sign Up!")
         setIsLoading(true);
@@ -144,7 +143,7 @@ function RegistrationForm() {
                             <FontAwesomeIcon icon={faInfoCircle}/>
                             Must match the first password input field.
                         </p>
-                        {!isLoading && <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>}
+                        {!isLoading && <button disabled={!validName || !validPwd || !validMatch}>Sign Up</button>}
                         {isLoading && <p>Loading...</p>}
                     </form>
                 </section>

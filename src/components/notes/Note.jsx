@@ -2,8 +2,11 @@ import React from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@material-ui/core/Fab';
+import {useContext} from "react";
+import AuthContext from "../../store/auth-context";
 
 function Note(props) {
+    const authCtx = useContext(AuthContext);
 
     function handleDelete() {
         props.onDelete(props.id);
@@ -17,12 +20,12 @@ function Note(props) {
         <div className={"note"}>
             <h1>{props.title}</h1>
             <p>{props.content}</p>
-            <Fab onClick={handleDelete}>
+            {authCtx.isLoggedIn && props.ownerEmail === authCtx.email && <Fab onClick={handleDelete}>
                 <DeleteIcon style={{color: props.color}}/>
-            </Fab>
-            <Fab onClick={handleEdit}>
+            </Fab>}
+            {authCtx.isLoggedIn && props.ownerEmail === authCtx.email && <Fab onClick={handleEdit}>
                 <EditIcon style={{color: props.color}}/>
-            </Fab>
+            </Fab>}
         </div>
     );
 }

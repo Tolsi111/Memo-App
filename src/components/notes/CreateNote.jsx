@@ -1,9 +1,11 @@
-import React, {useState} from "react";
+import React, {useState,useContext} from "react";
 import Buttons from "./Buttons";
 import ErrorModal from "../layout/ErrorModal";
 import {useNavigate} from 'react-router-dom';
+import AuthContext from "../../store/auth-context";
 
 function CreateNote(props) {
+    const authCtx = useContext(AuthContext);
 
     const navigate = useNavigate();
     const [isExpanded, setExpanded] = useState(false);
@@ -12,7 +14,7 @@ function CreateNote(props) {
     });
 
     const [note, setNote] = useState({
-        title: "", content: "", color: ""
+        title: "", content: "", color: "", ownerEmail: ""
     });
 
     function expand() {
@@ -49,6 +51,7 @@ function CreateNote(props) {
             return
         }
         note.color = event.target.style.background;
+        note.ownerEmail = authCtx.email;
         props.onAdd(note);
         setNote({
             title: "", content: "", color: ""
