@@ -128,3 +128,14 @@ form.create-note div {
     bottom: -18px;
 
 }
+
+.edit-note input,
+.edit-note textarea {
+    width: 100%;
+    border: none;
+    padding: 4px;
+    outline: none;
+    font-size: 1.2em;
+    font-family: inherit;
+    resize: none;
+}
