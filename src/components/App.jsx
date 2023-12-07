@@ -37,8 +37,9 @@ function App() {
 
     }
 
-    function editNote() {
-        alert("Feature to be implemented...")
+    function editNote(id, note) {
+        deleteNote(id);
+        addNote(note);
     }
 
     useEffect(() => {

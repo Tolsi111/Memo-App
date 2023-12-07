@@ -25,15 +25,18 @@ function Note(props) {
     }
 
     function handleEdit() {
-        console.log("Edit note....")
         setEditMode(true);
-        //props.onEdit(props.id);
     }
 
     function handleDone() {
-        console.log("Finished editing note....")
-        console.log("New note title:" + editTitle)
-        console.log("New note content:" + editContent)
+        // delete this note, save another
+        let note = {
+            title: editTitle,
+            content: editContent,
+            color: props.color,
+            ownerEmail: props.ownerEmail
+        };
+        props.onEdit(props.id,note)
         setEditMode(false);
     }
 
@@ -46,14 +49,10 @@ function Note(props) {
             {editMode && <div className={"edit-note"}>
                 <input name={"title"}
                        defaultValue={props.title}
-                       //onBlur={() => {setEditTitleFocus(false)}}
-                       //onFocus={() => {setEditTitleFocus(true)}}
                        onChange={(e) => setEditTitle(e.target.value)}
                 />
                 <textarea name={"content"}
                           defaultValue={props.content}
-                          //onBlur={() => {setEditContentFocus(false)}}
-                          //onFocus={() => {setEditContentFocus(true)}}
                           onChange={(e) => setEditContent(e.target.value)}
                 />
             </div>}
